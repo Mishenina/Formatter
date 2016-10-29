@@ -1,4 +1,4 @@
-package main.java.formatter;
+package formatter;
 
 import  java.util.logging.Logger;
 import java.io.FileInputStream;
@@ -17,14 +17,14 @@ import java.io.IOException;
  */
 public final class Main {
     /**
-     *
+     *main method.
      * @param args parameters
      */
     public static void main(final String[] args) {
 
     StringBuilder text;
 
-    text = Main.read("src/main/resources");
+    text = Main.read("src/main/resources/input");
 
     final int space = 4;
     int indent = 0;
@@ -68,7 +68,7 @@ public final class Main {
                 break;
         }
     }
-    Main.write("src/main/resources", text);
+    Main.write("src/main/resources/output", text);
     System.out.print(text);
 
 }
@@ -80,7 +80,7 @@ public final class Main {
     }
 
     /**
-     *
+     * read from a file.
      * @param fileName file name
      * @return StringBuilder
      */
@@ -107,7 +107,7 @@ public final class Main {
     }
 
     /**
-     *
+     * write to file.
      * @param fileName file name
      * @param text text
      */

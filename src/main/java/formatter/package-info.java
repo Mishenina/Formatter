@@ -1,4 +1,4 @@
 /**
- * package main.java.formatter.
+ * package formatter.
  */
-package main.java.formatter;
+package formatter;
