@@ -7,56 +7,113 @@ package formatter;
 public class Formatter implements IFormatter {
     /**
      * text formatting.
-     * @param in input text
+     *
+     * @param in  input text
      * @param out output text
+     * @throws FormatterException when formatting failed
      */
-    public final void format(final IReader in, final IWriter out) {
+    public final void format(final IReader in, final IWriter out) throws FormatterException {
 
-        StringBuilder inputText = in.read("src/main/resources/input");
+        try {
+            final int space = 4;
+            int indent = 0;
+            boolean onelineComment = false;
+            boolean multilineComment = false;
+            char previousSymbol = ' ';
 
-        final int space = 4;
-        int indent = 0;
-        for (int i = 0; i < inputText.length(); i++) {
-            switch (inputText.charAt(i)) {
-                case ';':
-                    inputText.insert(i + 1, "\n");
-                    for (int j = 0; j < indent * space; j++) {
-                        inputText.insert(i + 2 + j, " ");
-                    }
-                    i += 1 + indent * space;
-                    break;
+            while (in.ready()) {
+                char symbol = in.readChar();
 
-                case '{':
-                    indent++;
-                    inputText.insert(i + 1, "\n");
-                    for (int j = 0; j < indent * space; j++) {
-                        inputText.insert(i + 2 + j, " ");
-                    }
-                    i += 1 + indent * space;
-                    break;
+                switch (symbol) {
+                    case ';':
+                        if (!multilineComment && !onelineComment) {
+                            out.write(symbol);
+                            out.write('\n');
+                            for (int i = 0; i < space * indent; i++) {
+                                out.write(' ');
+                            }
+                        } else {
+                            out.write(symbol);
+                        }
+                        break;
+                    case '{':
+                        if (!multilineComment && !onelineComment) {
+                            indent++;
+                            out.write(' ');
+                            out.write(symbol);
 
-                case '}':
-                    if (indent != 0) {
-                        indent--;
-                    }
-                    inputText.insert(i, "\n");
-                    for (int j = 0; j < indent * space; j++) {
-                        inputText.insert(i + 1, " ");
-                    }
+                            out.write('\n');
+                            for (int i = 0; i < space * indent; i++) {
+                                out.write(' ');
+                            }
 
-                    i += 2 + indent * space;
-                    inputText.insert(i, "\n");
-                    for (int j = 0; j < indent * space; j++) {
-                        inputText.insert(i + 1 + j, " ");
-                    }
-                    i += 1 + indent * space;
-                    break;
+                        } else {
+                            out.write(symbol);
+                        }
+                        break;
+                    case '}':
+                        if (!multilineComment && !onelineComment) {
+                            indent--;
+                            out.write('\n');
+                            for (int i = 0; i < space * indent; i++) {
+                                out.write(' ');
+                            }
+                            out.write(symbol);
 
-                default:
-                    break;
+                            out.write('\n');
+                            for (int i = 0; i < space * indent; i++) {
+                                out.write(' ');
+                            }
+
+                        } else {
+                            out.write(symbol);
+                        }
+                        break;
+                    case '/':
+                        if (previousSymbol == '*') {
+                            multilineComment = false;
+                        }
+                        if (previousSymbol == '/') {
+                            onelineComment = true;
+                        }
+                        out.write(symbol);
+                        break;
+                    case '*':
+                        if (previousSymbol == '/') {
+                            multilineComment = true;
+                        }
+                        out.write(symbol);
+                        break;
+                    case '\n':
+                        onelineComment = false;
+                        out.write(symbol);
+                    default:
+                        out.write(symbol);
+                        break;
+
+
+                }
+
+                previousSymbol = symbol;
             }
+        } catch (Exception e) {
+            throw new FormatterException("format failed", e);
         }
-        out.write("src/main/resources/output", inputText);
-        System.out.print(inputText);
+
+
+    }
+
+    /**
+     * Formatter exception.
+     */
+    public class FormatterException extends Exception {
+        /**
+         * Formatter exception.
+         * @param message message
+         * @param cause exception
+         */
+        FormatterException(final String message, final Throwable cause) {
+            super(message, cause);
+        }
     }
 }

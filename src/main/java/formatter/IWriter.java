@@ -1,13 +1,29 @@
 package formatter;
 
+import java.io.IOException;
+
 /**
  * Writer interface.
  */
 public interface IWriter {
+
     /**
-     * write to file.
+     * method open the file.
      * @param fileName file name
-     * @param text source text
+     * @throws IOException exception
      */
-   void write(String fileName, StringBuilder text);
+    void openFile(String fileName) throws IOException;
+
+    /**
+     * write symbol to file.
+     * @param c symbol
+     * @throws IOException exception
+     */
+    void write(char c) throws IOException;
+
+    /**
+     *  method closes the file.
+     * @throws IOException exception
+     */
+    void closeFile() throws IOException;
 }
