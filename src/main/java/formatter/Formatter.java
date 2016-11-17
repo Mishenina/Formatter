@@ -1,6 +1,9 @@
 package formatter;
 
 
+import reader.IReader;
+import writer.IWriter;
+
 /**
  * Formatter from in to out.
  */
@@ -22,89 +25,16 @@ public class Formatter implements IFormatter {
             boolean charLiteral = false;
             boolean stringLiteral = false;
             char previousSymbol = ' ';
+            StyleFormat styleFormat = new StyleFormat();
 
             while (in.ready()) {
+
                 char symbol = in.readChar();
-                if (symbol == '\"') {
-                    stringLiteral = !stringLiteral;
-                }
-                if (symbol == '\'') {
-                    charLiteral = !charLiteral;
-                }
-                if (!charLiteral && !stringLiteral) {
-                    switch (symbol) {
-                        case ';':
-                            if (!multilineComment && !onelineComment) {
-                                out.write(symbol);
-                                out.write('\n');
-                                for (int i = 0; i < space * indent; i++) {
-                                    out.write(' ');
-                                }
-                            } else {
-                                out.write(symbol);
-                            }
-                            break;
-                        case '{':
-                            if (!multilineComment && !onelineComment) {
-                                indent++;
-                                out.write(' ');
-                                out.write(symbol);
-
-                                out.write('\n');
-                                for (int i = 0; i < space * indent; i++) {
-                                    out.write(' ');
-                                }
-
-                            } else {
-                                out.write(symbol);
-                            }
-                            break;
-                        case '}':
-                            if (!multilineComment && !onelineComment) {
-                                indent--;
-                                out.write('\n');
-                                for (int i = 0; i < space * indent; i++) {
-                                    out.write(' ');
-                                }
-                                out.write(symbol);
-
-                                out.write('\n');
-                                for (int i = 0; i < space * indent; i++) {
-                                    out.write(' ');
-                                }
-
-                            } else {
-                                out.write(symbol);
-                            }
-                            break;
-                        case '/':
-                            if (previousSymbol == '*') {
-                                multilineComment = false;
-                            }
-                            if (previousSymbol == '/') {
-                                onelineComment = true;
-                            }
-                            out.write(symbol);
-                            break;
-                        case '*':
-                            if (previousSymbol == '/') {
-                                multilineComment = true;
-                            }
-                            out.write(symbol);
-                            break;
-                        case '\n':
-                            onelineComment = false;
-                            out.write(symbol);
-                        default:
-                            out.write(symbol);
-                            break;
-
-
-                    }
-
-                    previousSymbol = symbol;
-                } else {
-                    out.write(symbol);
+                Symbol s = SymbolFactory.getSymbol(symbol);
+                String str = s.processSymbol(symbol, space, styleFormat);
+                styleFormat = s.getStyleFormat();
+                for (int i = 0; i < str.length(); i++) {
+                    out.write(str.charAt(i));
                 }
             }
         } catch (Exception e) {
@@ -120,8 +50,9 @@ public class Formatter implements IFormatter {
     public class FormatterException extends Exception {
         /**
          * Formatter exception.
+         *
          * @param message message
-         * @param cause exception
+         * @param cause   exception
          */
         FormatterException(final String message, final Throwable cause) {
             super(message, cause);

@@ -1,5 +1,8 @@
 package formatter;
 
+import reader.IReader;
+import writer.IWriter;
+
 /**
  * Formatter interface.
  */
