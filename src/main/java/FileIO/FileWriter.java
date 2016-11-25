@@ -1,7 +1,9 @@
-package writer;
+package FileIO;
 
 
 import java.io.BufferedWriter;
+import Core.IWriter;
+import Core.WriterException;
 
 /**
  * Writer to write to string.
@@ -16,13 +18,13 @@ public class FileWriter implements IWriter {
     /**
      * write symbol to file.
      *
-     * @param c symbol
+     * @param str string
      * @throws WriterException exception
      */
-    public final void write(final char c) throws WriterException {
+    public final void write(final String str) throws WriterException {
 
         try {
-            writer.write(c);
+            writer.write(str);
         } catch (Exception e) {
             throw new WriterException("writer failed", e);
         }

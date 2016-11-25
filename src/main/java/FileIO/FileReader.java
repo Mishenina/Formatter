@@ -1,7 +1,10 @@
-package reader;
+package FileIO;
 
 
 import java.io.BufferedReader;
+import Core.IReader;
+import Core.ReaderException;
+
 
 /**
  * Reader to read chars from string.
@@ -11,7 +14,7 @@ public class FileReader implements IReader {
     /**
      * Buffer reader.
      */
-    private static BufferedReader bufferedReader;
+    private BufferedReader bufferedReader;
 
     /**
      * read char from a file.
@@ -35,6 +38,7 @@ public class FileReader implements IReader {
      */
     public final boolean ready() throws ReaderException {
         try {
+
             return bufferedReader.ready();
         } catch (Exception e) {
             throw new ReaderException("reader failed", e);

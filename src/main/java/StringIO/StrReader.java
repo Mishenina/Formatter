@@ -1,9 +1,13 @@
-package reader;
+package StringIO;
+
+
+import Core.IReader;
+import Core.ReaderException;
 
 import java.io.StringReader;
 
 /**
- * Created by anna on 15.11.16.
+ * reader string.
  */
 public class StrReader  implements IReader {
     /**
@@ -28,7 +32,7 @@ public class StrReader  implements IReader {
      */
     public final char readChar() throws ReaderException {
         try {
-            return (char) reader.read();
+            return (char) reader.read() ;
         } catch (Exception e) {
             throw new ReaderException("reader failed", e);
         }
@@ -41,7 +45,10 @@ public class StrReader  implements IReader {
      */
     public final boolean ready() throws ReaderException {
         try {
-            return reader.ready();
+            reader.mark(1);
+            char result = (char) reader.read();
+            reader.reset();
+            return result < Character.MAX_VALUE;
         } catch (Exception e) {
             throw new ReaderException("reader failed", e);
         }

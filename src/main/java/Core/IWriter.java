@@ -1,5 +1,4 @@
-package writer;
-
+package Core;
 
 /**
  * Writer interface.
@@ -8,16 +7,15 @@ public interface IWriter {
 
     /**
      * write symbol to file.
-     * @param c symbol
+     * @param str symbol
      * @throws WriterException exception
      */
-    void write(char c) throws  WriterException;
+    void write(String str) throws  WriterException;
 
     /**
      *  method closes the file.
      * @throws WriterException exception
      */
     void close() throws WriterException;
-
 
 }

@@ -1,7 +1,7 @@
-package reader;
+package Core;
 
 /**
- * Created by anna on 16.11.16.
+ * reader exception.
  */
 public class ReaderException extends Exception {
     /**

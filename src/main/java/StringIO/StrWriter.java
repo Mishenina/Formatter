@@ -1,9 +1,13 @@
-package writer;
+package StringIO;
+
+
+import Core.IWriter;
+import Core.WriterException;
 
 import java.io.StringWriter;
 
 /**
- * Created by anna on 15.11.16.
+ *writer string.
  */
 public class StrWriter implements IWriter {
     /**
@@ -23,7 +27,7 @@ public class StrWriter implements IWriter {
      * @param c symbol
      * @throws WriterException Exception
      */
-    public final void write(final char c) throws WriterException {
+    public final void write(final String c) throws WriterException {
         try {
 
         writer.write(c);

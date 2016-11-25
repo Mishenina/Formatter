@@ -1,7 +1,7 @@
-package writer;
+package Core;
 
 /**
- * Created by anna on 17.11.16.
+ * writer exception.
  */
 public class WriterException extends Exception {
     /**
