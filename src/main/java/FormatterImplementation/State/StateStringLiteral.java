@@ -1,4 +1,4 @@
-package FormatterImplementation;
+package FormatterImplementation.State;
 
 /**
  * stage formatter string literal.
@@ -6,14 +6,19 @@ package FormatterImplementation;
 class StateStringLiteral implements IState {
 
     /**
+     * default constructor.
+     * @param indent current indent
+     *
+     */
+     StateStringLiteral(final int indent) {
+        setIndent(indent);
+
+    }
+
+    /**
      * indent.
      */
     private int indent;
-
-    /**
-     * previous symbol.
-     */
-    private char previousSymbol;
 
     /**
      * determine next state.
@@ -23,12 +28,10 @@ class StateStringLiteral implements IState {
      */
     public IState getNextState(final char c) {
 
-        previousSymbol = c;
-
         if (c == '\"') {
-            return new StateDefault();
+            return new StateDefault(indent);
         } else {
-            return new StateStringLiteral();
+            return new StateStringLiteral(indent);
         }
     }
 
@@ -50,22 +53,5 @@ class StateStringLiteral implements IState {
         return this.indent;
     }
 
-    /**
-     * set current previous symbol.
-     *
-     * @param value value
-     */
-    public void setPreviousSymbol(final char value) {
-        this.previousSymbol = value;
-    }
-
-    /**
-     * get current previous symbol.
-     *
-     * @return current previous symbol
-     */
-    public char getPreviousSymbol() {
-        return this.previousSymbol;
-    }
 
 }

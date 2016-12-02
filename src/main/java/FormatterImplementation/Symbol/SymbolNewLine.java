@@ -1,11 +1,14 @@
-package FormatterImplementation;
+package FormatterImplementation.Symbol;
+
 
 import Core.IWriter;
 import Core.WriterException;
+import FormatterImplementation.State.IState;
+
 /**
- * Symbol open brace.
+ * method for formatting.
  */
-class SymbolOpenBrace implements ISymbol {
+class SymbolNewLine implements ISymbol {
 
     /**
      * method for processing a symbol.
@@ -15,10 +18,9 @@ class SymbolOpenBrace implements ISymbol {
      * @param out   output stream
      * @throws WriterException exception writer
      */
-    public final void processSymbol(final char c, final IState state, final IWriter out) throws WriterException {
-        out.write(" {\n");
-        int indent = state.getIndent() + 1;
-        state.setIndent(indent);
+    public void processSymbol(final char c, final IState state, final IWriter out) throws WriterException {
+        out.write("\n");
+        int indent = state.getIndent();
         for (int i = 0; i < indent; i++) {
             out.write("\t");
         }

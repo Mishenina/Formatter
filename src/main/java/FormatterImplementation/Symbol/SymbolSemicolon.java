@@ -1,13 +1,13 @@
-package FormatterImplementation;
-
+package FormatterImplementation.Symbol;
 
 import Core.IWriter;
 import Core.WriterException;
+import FormatterImplementation.State.IState;
 
 /**
- * method for formatting.
+ * Symbol semicolon.
  */
-class SymbolNewLine implements ISymbol {
+class SymbolSemicolon implements ISymbol {
 
     /**
      * method for processing a symbol.
@@ -17,8 +17,8 @@ class SymbolNewLine implements ISymbol {
      * @param out   output stream
      * @throws WriterException exception writer
      */
-    public void processSymbol(final char c, final IState state, final IWriter out) throws WriterException {
-        out.write("\n");
+    public final void processSymbol(final char c, final IState state, final IWriter out) throws WriterException {
+        out.write(";\n");
         int indent = state.getIndent();
         for (int i = 0; i < indent; i++) {
             out.write("\t");
@@ -26,3 +26,4 @@ class SymbolNewLine implements ISymbol {
     }
 
 }
+

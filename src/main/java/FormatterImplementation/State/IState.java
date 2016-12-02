@@ -1,4 +1,4 @@
-package FormatterImplementation;
+package FormatterImplementation.State;
 
 /**
  * formatter state interface.
@@ -8,7 +8,7 @@ public interface IState {
     /**
      * previous symbol.
      */
-    char previousSymbol = ' ';
+//    char previousSymbol = ' ';
 
     /**
      * indent.
@@ -36,16 +36,5 @@ public interface IState {
      * @return current indent
      */
     int getIndent();
-    /**
-     * set current previous symbol.
-     *
-     * @param value value
-     */
-     void setPreviousSymbol(char value);
 
-    /**
-     * get current previous symbol.
-     * @return current previous symbol
-     */
-     char getPreviousSymbol();
 }

@@ -1,12 +1,13 @@
-package FormatterImplementation;
+package FormatterImplementation.Symbol;
 
 import Core.IWriter;
 import Core.WriterException;
+import FormatterImplementation.State.IState;
 
 /**
- * Symbol close brace.
+ *Symbol other.
  */
-class SymbolCloseBrace implements ISymbol {
+class SymbolOther implements ISymbol {
 
     /**
      * method for processing a symbol.
@@ -17,20 +18,9 @@ class SymbolCloseBrace implements ISymbol {
      * @throws WriterException exception writer
      */
     public final void processSymbol(final char c, final IState state, final IWriter out) throws WriterException {
-
-        out.write("\n");
-        int indent = state.getIndent() - 1;
-        state.setIndent(indent);
-        for (int i = 0; i < indent; i++) {
-            out.write("\t");
-        }
         out.write(String.valueOf(c));
-        out.write("\n");
-
-        for (int i = 0; i < indent; i++) {
-            out.write("\t");
-        }
 
     }
 
 }
+

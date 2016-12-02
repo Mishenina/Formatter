@@ -11,7 +11,7 @@ import java.io.StringWriter;
  */
 public class StrWriter implements IWriter {
     /**
-     * string writer
+     * string writer.
      */
     private StringWriter writer;
 

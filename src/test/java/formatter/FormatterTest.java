@@ -1,14 +1,16 @@
 package formatter;
 
-import Core.*;
+import Core.FormatterException;
+import Core.IReader;
+import Core.ReaderException;
+import Core.WriterException;
+import Core.IWriter;
+import Core.IFormatter;
 import StringIO.StrReader;
 import StringIO.StrWriter;
 import org.junit.Before;
 import org.junit.Test;
 import FormatterImplementation.Formatter;
-
-import java.io.BufferedReader;
-import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -38,11 +40,9 @@ public class FormatterTest {
      * test method for brace.
      *
      * @throws FormatterException exception
-     * @throws ReaderException exception reader
-     * @throws WriterException exception writer
      */
     @Test
-    public void testBrace() throws FormatterException, ReaderException, WriterException {
+    public void testBrace() throws FormatterException {
 
         in = new StrReader("test{test;}");
         out = new StrWriter();
@@ -58,11 +58,9 @@ public class FormatterTest {
      * test method for multiline comment.
      *
      * @throws FormatterException exception
-     * @throws ReaderException exception reader
-     * @throws WriterException exception writer
      */
     @Test
-    public void testMultilineComment() throws FormatterException, ReaderException, WriterException {
+    public void testMultilineComment() throws FormatterException {
 
         in = new StrReader("test/*test;*/");
         out = new StrWriter();
@@ -74,11 +72,9 @@ public class FormatterTest {
     /**
      * test method for symbol new line.
      * @throws FormatterException exception formatter
-     * @throws ReaderException exception reader
-     * @throws WriterException exception writer
      */
     @Test
-    public void testNewLine() throws FormatterException, ReaderException, WriterException {
+    public void testNewLine() throws FormatterException {
 
         in = new StrReader("test\n");
         out = new StrWriter();
@@ -90,45 +86,39 @@ public class FormatterTest {
     /**
      * test method for string literal.
      * @throws FormatterException exception formatter
-     * @throws ReaderException exception reader
-     * @throws WriterException exception writer
      */
 
     @Test
-    public void testStringLiteral() throws FormatterException, ReaderException, WriterException {
+    public void testStringLiteral() throws FormatterException {
 
-        in = new StrReader("test\"test;\n\"");
+        in = new StrReader("test\"test;\"");
         out = new StrWriter();
         formatter.format(in, out);
-        check = "test\"test;\n\"";
+        check = "test\"test;\"";
         assertEquals(check, out.toString());
     }
 
     /**
      * test method for char literal.
      * @throws FormatterException exception formatter
-     * @throws ReaderException exception reader
-     * @throws WriterException exception writer
      */
 
     @Test
-    public void testCharLiteral() throws FormatterException, ReaderException, WriterException {
+    public void testCharLiteral() throws FormatterException {
 
-        in = new StrReader("test\'\n\'test;");
+        in = new StrReader("test'{'test");
         out = new StrWriter();
         formatter.format(in, out);
-        check = "test\'\n\'test;";
+        check = "test'{'test";
         assertEquals(check, out.toString());
     }
 
     /**
      * test method for comment.
      * @throws FormatterException exception formatter
-     * @throws ReaderException exception reader
-     * @throws WriterException exception writer
      */
     @Test
-    public void testComment() throws FormatterException, ReaderException, WriterException {
+    public void testComment() throws FormatterException {
 
         in = new StrReader("test//test;{}");
         out = new StrWriter();

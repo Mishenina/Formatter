@@ -1,7 +1,13 @@
 package FormatterImplementation;
 
 
-import Core.*;
+
+import Core.FormatterException;
+import Core.IReader;
+import Core.ReaderException;
+import Core.WriterException;
+import Core.IWriter;
+import Core.IFormatter;
 import FileIO.FileReader;
 import FileIO.FileWriter;
 

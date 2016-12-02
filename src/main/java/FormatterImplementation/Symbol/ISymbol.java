@@ -1,12 +1,13 @@
-package FormatterImplementation;
+package FormatterImplementation.Symbol;
 
 import Core.IWriter;
 import Core.WriterException;
+import FormatterImplementation.State.IState;
 
 /**
  * symbol interface.
  */
-interface ISymbol {
+public interface ISymbol {
 
     /**
      *  method for processing a symbol.
@@ -15,7 +16,7 @@ interface ISymbol {
      * @param out output stream
      * @throws WriterException exception writer
      */
-    void processSymbol(char c, IState state, final IWriter out) throws WriterException;
+    void processSymbol(char c, IState state, IWriter out) throws WriterException;
 
 }
 

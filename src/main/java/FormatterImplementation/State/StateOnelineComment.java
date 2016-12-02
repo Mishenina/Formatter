@@ -1,4 +1,4 @@
-package FormatterImplementation;
+package FormatterImplementation.State;
 
 /**
  * formatter state oneline comment.
@@ -11,10 +11,6 @@ class StateOnelineComment implements IState {
      */
     private int indent;
 
-    /**
-     * previous symbol.
-     */
-    private char previousSymbol;
 
     /**
      * determine next state.
@@ -24,12 +20,10 @@ class StateOnelineComment implements IState {
      */
     public IState getNextState(final char c) {
 
-        previousSymbol = c;
-
         if (c == '\n') {
-            return new StateDefault();
+            return new StateDefault(indent);
         } else {
-            return new StateOnelineComment();
+            return new StateOnelineComment(indent);
         }
     }
 
@@ -52,20 +46,11 @@ class StateOnelineComment implements IState {
     }
 
     /**
-     * set current previous symbol.
+     * default constructor.
+     * @param indent current indent
      *
-     * @param value value
      */
-    public void setPreviousSymbol(final char value) {
-        this.previousSymbol = value;
-    }
-
-    /**
-     * get current previous symbol.
-     *
-     * @return current previous symbol
-     */
-    public char getPreviousSymbol() {
-        return this.previousSymbol;
+    StateOnelineComment(final int indent) {
+        setIndent(indent);
     }
 }

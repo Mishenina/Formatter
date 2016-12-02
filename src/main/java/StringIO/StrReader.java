@@ -32,7 +32,7 @@ public class StrReader  implements IReader {
      */
     public final char readChar() throws ReaderException {
         try {
-            return (char) reader.read() ;
+            return (char) reader.read();
         } catch (Exception e) {
             throw new ReaderException("reader failed", e);
         }
