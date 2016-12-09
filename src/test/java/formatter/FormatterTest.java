@@ -1,16 +1,16 @@
 package formatter;
 
-import Core.FormatterException;
-import Core.IReader;
-import Core.ReaderException;
-import Core.WriterException;
-import Core.IWriter;
-import Core.IFormatter;
-import StringIO.StrReader;
-import StringIO.StrWriter;
+import formatter.core.FormatterException;
+import formatter.core.IReader;
+import formatter.core.ReaderException;
+import formatter.core.WriterException;
+import formatter.core.IWriter;
+import formatter.core.IFormatter;
+import formatter.stringIO.StrReader;
+import formatter.stringIO.StrWriter;
 import org.junit.Before;
 import org.junit.Test;
-import FormatterImplementation.Formatter;
+import formatter.formatterimplementation.Formatter;
 
 import static org.junit.Assert.assertEquals;
 

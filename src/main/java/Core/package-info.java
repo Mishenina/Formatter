@@ -1,4 +1,0 @@
-/**
- * core formatter.
- */
-package Core;
