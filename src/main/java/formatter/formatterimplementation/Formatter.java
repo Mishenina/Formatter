@@ -25,13 +25,15 @@ public class Formatter implements IFormatter {
     public final void format(final IReader in, final IWriter out) throws FormatterException {
 
         try {
-            IState currentState = new StateDefault(0);
+            IState currentState = new StateDefault();
             SymbolFactory factory = new SymbolFactory();
-            NextState nextState = new NextState(0);
+            NextState nextState = new NextState();
+            Indent indent = new Indent();
+            indent.setIndent(0);
             while (in.ready()) {
                 String token = in.read();
                 ISymbol s = factory.getToken(token, currentState);
-                s.processSymbol(token, currentState, out);
+                s.processSymbol(token, indent, out);
                 currentState = nextState.getNextState(token, currentState);
 
             }

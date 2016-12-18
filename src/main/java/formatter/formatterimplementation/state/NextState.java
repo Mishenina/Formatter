@@ -36,47 +36,39 @@ public class NextState {
     }
     /**
      * default constructor.
-     * @param indent current indent
      *
      */
-    public NextState(final int indent) {
+    public NextState() {
         map = new HashMap<>();
-        this.indent = indent;
 
 
-        map.put(new Current("/*", new StateDefault(indent)), new StateMultilineComment(indent));
-        map.put(new Current("//", new StateDefault(indent)), new StateOnelineComment(indent));
-        map.put(new Current("\"", new StateDefault(indent)), new StateStringLiteral(indent));
-        map.put(new Current("\'", new StateDefault(indent)), new StateCharLiteral(indent));
-        map.put(new Current("for", new StateDefault(indent)), new StateFor(indent));
-        map.put(new Current("default", new StateDefault(indent)), new StateDefault(indent));
+        map.put(new Current("/*", new StateDefault()), new StateMultilineComment());
+        map.put(new Current("//", new StateDefault()), new StateOnelineComment());
+        map.put(new Current("\"", new StateDefault()), new StateStringLiteral());
+        map.put(new Current("\'", new StateDefault()), new StateCharLiteral());
+        map.put(new Current("for", new StateDefault()), new StateFor());
+        map.put(new Current("default", new StateDefault()), new StateDefault());
 
-        map.put(new Current("\'", new StateCharLiteral(indent)), new StateDefault(indent));
-        map.put(new Current("default", new StateCharLiteral(indent)), new StateCharLiteral(indent));
+        map.put(new Current("\'", new StateCharLiteral()), new StateDefault());
+        map.put(new Current("default", new StateCharLiteral()), new StateCharLiteral());
 
-        map.put(new Current(")", new StateFor(indent)), new StateDefault(indent));
-        map.put(new Current("default", new StateFor(indent)), new StateFor(indent));
+        map.put(new Current(")", new StateFor()), new StateDefault());
+        map.put(new Current("default", new StateFor()), new StateFor());
 
 
-        map.put(new Current("\'", new StateCharLiteral(indent)), new StateDefault(indent));
-        map.put(new Current("default", new StateCharLiteral(indent)), new StateCharLiteral(indent));
+        map.put(new Current("\'", new StateCharLiteral()), new StateDefault());
+        map.put(new Current("default", new StateCharLiteral()), new StateCharLiteral());
 
-        map.put(new Current("*/", new StateMultilineComment(indent)), new StateDefault(indent));
-        map.put(new Current("default", new StateMultilineComment(indent)), new StateMultilineComment(indent));
+        map.put(new Current("*/", new StateMultilineComment()), new StateDefault());
+        map.put(new Current("default", new StateMultilineComment()), new StateMultilineComment());
 
-        map.put(new Current("\n", new StateOnelineComment(indent)), new StateDefault(indent));
-        map.put(new Current("default", new StateOnelineComment(indent)), new StateOnelineComment(indent));
+        map.put(new Current("\n", new StateOnelineComment()), new StateDefault());
+        map.put(new Current("default", new StateOnelineComment()), new StateOnelineComment());
 
-        map.put(new Current("\"", new StateStringLiteral(indent)), new StateDefault(indent));
-        map.put(new Current("default", new StateStringLiteral(indent)), new StateStringLiteral(indent));
+        map.put(new Current("\"", new StateStringLiteral()), new StateDefault());
+        map.put(new Current("default", new StateStringLiteral()), new StateStringLiteral());
 
     }
-
-
-    /**
-     * indent.
-     */
-    private int indent;
 
 
     /**
