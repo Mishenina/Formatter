@@ -9,12 +9,12 @@ import java.util.HashMap;
 /**
  * object class selection.
  */
-public class TokenFactory {
+public class SymbolFactory {
 
     /**
      * default constructor.
      */
-    public TokenFactory() {
+    public SymbolFactory() {
         map.put("{", new SymbolOpenBrace());
         map.put("}", new SymbolCloseBrace());
         map.put(";", new SymbolSemicolon());

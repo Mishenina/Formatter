@@ -20,7 +20,8 @@ public interface IReader {
     boolean ready() throws ReaderException;
 
     /**
-     * repositions this stream to the position at the time the mark method was last called on this input stream.
+     * repositions this stream to the position at the time the mark method
+     * was last called on this input stream.
      * @throws ReaderException exception
      */
     void reset() throws ReaderException;

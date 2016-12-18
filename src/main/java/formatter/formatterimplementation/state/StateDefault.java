@@ -18,13 +18,6 @@ public class StateDefault implements IState {
     private int indent;
 
     /**
-     * determine next state.
-     *
-     * @param c current char
-     * @return next state
-     */
-
-    /**
      * set current indent.
      * @param value value
      */

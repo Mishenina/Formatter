@@ -1,9 +1,9 @@
 package formatter.formatterimplementation.state;
 
 /**
- * Created by anna on 09.12.16.
+ * formatter state for loop.
  */
-public class StateFor  implements IState {
+class StateFor  implements IState {
 
     /**
      * default constructor.
@@ -26,7 +26,7 @@ public class StateFor  implements IState {
      *
      * @param value value
      */
-    public void setIndent(final int value) {
+    public final void setIndent(final int value) {
         this.indent = value;
     }
 
@@ -35,7 +35,7 @@ public class StateFor  implements IState {
      *
      * @return current indent
      */
-    public int getIndent() {
+    public final int getIndent() {
         return this.indent;
     }
 

@@ -126,6 +126,18 @@ public class FormatterTest {
         check = "test//test;{}";
         assertEquals(check, out.toString());
     }
+    /**
+     * test method for loop.
+     * @throws FormatterException exception formatter
+     */
+    @Test
+    public void testFor() throws FormatterException {
+        in = new StrReader("for (int i = 0; i < n; i++)");
+        out = new StrWriter();
+        formatter.format(in, out);
+        check = "for (int i = 0; i < n; i++)";
+        assertEquals(check, out.toString());
+    }
 
 }
 

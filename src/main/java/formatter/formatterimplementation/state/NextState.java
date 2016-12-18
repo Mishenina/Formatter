@@ -3,21 +3,34 @@ package formatter.formatterimplementation.state;
 import java.util.HashMap;
 
 /**
- * Created by anna on 06.12.16.
+ * selection of the next state.
  */
 public class NextState {
-
+    /**
+     * Map current token, current state and next state.
+     */
     private HashMap<Current, IState> map;
 
     /**
      * default constructor.
      */
     private class Current {
-        private String nextSymbol;
+        /**
+         * current token.
+         */
+        private String token;
+        /**
+         * current state.
+         */
         private IState currentState;
 
-        Current(final String nextSymbol, final IState currentState) {
-            this.nextSymbol = nextSymbol;
+        /**
+         *  default constructor.
+         * @param token current token
+         * @param currentState current state
+         */
+        Current(final String token, final IState currentState) {
+            this.token = token;
             this.currentState = currentState;
         }
     }
@@ -48,6 +61,7 @@ public class NextState {
         map.put(new Current("\'", new StateCharLiteral(indent)), new StateDefault(indent));
         map.put(new Current("default", new StateCharLiteral(indent)), new StateCharLiteral(indent));
 
+        map.put(new Current("*/", new StateMultilineComment(indent)), new StateDefault(indent));
         map.put(new Current("default", new StateMultilineComment(indent)), new StateMultilineComment(indent));
 
         map.put(new Current("\n", new StateOnelineComment(indent)), new StateDefault(indent));
@@ -67,17 +81,17 @@ public class NextState {
 
     /**
      * determine next state.
-     * @param c current char
+     * @param token current token
      * @param currentState current state
      * @return next state
      */
-    public IState getNextState(final String c, final IState currentState) {
-        Current test = new Current(c, currentState);
-        Current q = new Current("default", currentState);
-        if (map.containsKey(test)) {
-            return map.get(test);
+    public final IState getNextState(final String token, final IState currentState) {
+        Current currentS = new Current(token, currentState);
+        Current defaultS = new Current("default", currentState);
+        if (map.containsKey(currentS)) {
+            return map.get(currentS);
         } else {
-            return map.get(q); //new StateMultilineComment(indent);
+            return map.get(defaultS);
         }
     }
 }

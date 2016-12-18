@@ -5,14 +5,7 @@ package formatter.formatterimplementation.state;
  */
 public interface IState {
 
-    /**
-     * indent.
-     */
-    int indent = 0;
-
-
-
-    /**
+     /**
      * set current indent.
      *
      * @param value value

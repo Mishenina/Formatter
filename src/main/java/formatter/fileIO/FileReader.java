@@ -15,7 +15,7 @@ public class FileReader implements IReader {
     /**
      * Buffer reader.
      */
-    private BufferedReader bufferedReader;
+    private BufferedReader bufReader;
 
     /**
      * read char from a file.
@@ -25,8 +25,8 @@ public class FileReader implements IReader {
      */
     public final String read() throws ReaderException {
         try {
-            bufferedReader.mark(1);
-            return String.valueOf((char) bufferedReader.read());
+            bufReader.mark(1);
+            return String.valueOf((char) bufReader.read());
         } catch (Exception e) {
             throw new ReaderException("reader failed", e);
         }
@@ -41,19 +41,20 @@ public class FileReader implements IReader {
     public final boolean ready() throws ReaderException {
         try {
 
-            return bufferedReader.ready();
+            return bufReader.ready();
         } catch (Exception e) {
             throw new ReaderException("reader failed", e);
         }
     }
 
     /**
-     * repositions this stream to the position at the time the mark method was last called on this input stream.
+     * repositions this stream to the position at the time the mark method
+     * was last called on this input stream.
      * @throws ReaderException exception
      */
     public final void reset() throws ReaderException {
         try {
-            bufferedReader.reset();
+            bufReader.reset();
         } catch (Exception e) {
             throw new ReaderException("reader failed", e);
         }
@@ -67,7 +68,7 @@ public class FileReader implements IReader {
     public final void close() throws ReaderException {
         try {
 
-            bufferedReader.close();
+            bufReader.close();
         } catch (Exception e) {
             throw new ReaderException("reader failed", e);
         }
@@ -81,7 +82,7 @@ public class FileReader implements IReader {
      */
     public FileReader(final String fileName) throws ReaderException {
         try {
-            bufferedReader = new BufferedReader(new java.io.FileReader(fileName));
+            bufReader = new BufferedReader(new java.io.FileReader(fileName));
         } catch (Exception e) {
             throw new ReaderException("reader failed", e);
         }
