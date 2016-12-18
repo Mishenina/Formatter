@@ -26,11 +26,13 @@ public final class Main {
      */
     public static void main(final String[] args) throws FormatterException, ReaderException, WriterException {
         try {
-            IReader in = new FileReader(args[0]);
-            IWriter out = new FileWriter(args[1]);
-
+         /*   IReader in = new FileReader(args[0]);
+            IWriter out = new FileWriter(args[1]);*/
+            IReader in = new FileReader("src/main/resources/input");
+            IWriter out = new FileWriter("src/main/resources/output");
+            IReader lexer = new Lexer(in);
             IFormatter formatter = new Formatter();
-            formatter.format(in, out);
+            formatter.format(lexer, out);
             in.close();
             out.close();
         } catch (FormatterException e) {

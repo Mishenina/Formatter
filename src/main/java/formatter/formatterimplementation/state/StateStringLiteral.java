@@ -20,16 +20,6 @@ class StateStringLiteral implements IState {
      */
     private int indent;
 
-    public NextState nextState = new NextState(indent);
-    /**
-     * determine next state.
-     *
-     * @param c current char
-     * @return next state
-     */
-    public IState getNextState(final String c) {
-        return  nextState.getNextState(c, new StateStringLiteral(indent));
-    }
 
     /**
      * set current indent.

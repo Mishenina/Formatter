@@ -1,16 +1,16 @@
-package formatter.core;;
+package formatter.core;
 
 /**
- * Reader interface.
+ * Reader to read chars from string.
  */
-public interface IReader<T> {
+public interface IReader {
 
     /**
      *  read char from a file.
      * @return next char
      * @throws ReaderException exception
      */
-    T read()  throws ReaderException;
+    String read()  throws ReaderException;
 
     /**
      * method informs whether the stream is ready to be read.
@@ -19,6 +19,10 @@ public interface IReader<T> {
      */
     boolean ready() throws ReaderException;
 
+    /**
+     * repositions this stream to the position at the time the mark method was last called on this input stream.
+     * @throws ReaderException exception
+     */
     void reset() throws ReaderException;
     /**
      * method closes the file.

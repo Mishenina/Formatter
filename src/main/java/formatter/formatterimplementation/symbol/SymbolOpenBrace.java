@@ -7,7 +7,7 @@ import formatter.formatterimplementation.state.IState;
 /**
  * symbol open brace.
  */
-class TokenOpenBrace implements IToken {
+class SymbolOpenBrace implements ISymbol {
 
     /**
      * method for processing a symbol.

@@ -9,12 +9,14 @@ public class NextState {
 
     private HashMap<Current, IState> map;
 
+    /**
+     * default constructor.
+     */
     private class Current {
-
         private String nextSymbol;
         private IState currentState;
 
-        Current(String nextSymbol, IState currentState) {
+        Current(final String nextSymbol, final IState currentState) {
             this.nextSymbol = nextSymbol;
             this.currentState = currentState;
         }
@@ -24,7 +26,7 @@ public class NextState {
      * @param indent current indent
      *
      */
-    NextState(final int indent) {
+    public NextState(final int indent) {
         map = new HashMap<>();
         this.indent = indent;
 
@@ -34,23 +36,25 @@ public class NextState {
         map.put(new Current("\"", new StateDefault(indent)), new StateStringLiteral(indent));
         map.put(new Current("\'", new StateDefault(indent)), new StateCharLiteral(indent));
         map.put(new Current("for", new StateDefault(indent)), new StateFor(indent));
-        map.put(new Current('любой другой', new StateDefault(indent)), new StateDefault(indent));
+        map.put(new Current("default", new StateDefault(indent)), new StateDefault(indent));
 
         map.put(new Current("\'", new StateCharLiteral(indent)), new StateDefault(indent));
+        map.put(new Current("default", new StateCharLiteral(indent)), new StateCharLiteral(indent));
 
         map.put(new Current(")", new StateFor(indent)), new StateDefault(indent));
+        map.put(new Current("default", new StateFor(indent)), new StateFor(indent));
 
 
         map.put(new Current("\'", new StateCharLiteral(indent)), new StateDefault(indent));
-        map.put(new Current('любой другой', new StateCharLiteral(indent)), new StateCharLiteral(indent));
+        map.put(new Current("default", new StateCharLiteral(indent)), new StateCharLiteral(indent));
 
-        map.put(new Current('любой другой', new StateMultilineComment(indent)), new StateMultilineComment(indent));
+        map.put(new Current("default", new StateMultilineComment(indent)), new StateMultilineComment(indent));
 
         map.put(new Current("\n", new StateOnelineComment(indent)), new StateDefault(indent));
-        map.put(new Current('любой другой', new StateOnelineComment(indent)), new StateOnelineComment(indent));
+        map.put(new Current("default", new StateOnelineComment(indent)), new StateOnelineComment(indent));
 
         map.put(new Current("\"", new StateStringLiteral(indent)), new StateDefault(indent));
-        map.put(new Current('любой другой', new StateStringLiteral(indent)), new StateStringLiteral(indent));
+        map.put(new Current("default", new StateStringLiteral(indent)), new StateStringLiteral(indent));
 
     }
 
@@ -63,16 +67,17 @@ public class NextState {
 
     /**
      * determine next state.
-     *
      * @param c current char
+     * @param currentState current state
      * @return next state
      */
-    public IState getNextState(final String c, IState currentState) {
-        Current с = new Current(c, currentState);
-        if (map.containsKey(c)) {
-            return map.get(c);
+    public IState getNextState(final String c, final IState currentState) {
+        Current test = new Current(c, currentState);
+        Current q = new Current("default", currentState);
+        if (map.containsKey(test)) {
+            return map.get(test);
         } else {
-            return new StateMultilineComment(indent);
+            return map.get(q); //new StateMultilineComment(indent);
         }
     }
 }

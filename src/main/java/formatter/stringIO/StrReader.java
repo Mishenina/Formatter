@@ -30,10 +30,10 @@ public class StrReader  implements IReader {
      * @return next char
      * @throws ReaderException exception
      */
-    public final Object read() throws ReaderException {
+    public final String read() throws ReaderException {
         try {
             reader.mark(1);
-            return (char) reader.read();
+            return  String.valueOf((char) reader.read());
         } catch (Exception e) {
             throw new ReaderException("reader failed", e);
         }
@@ -55,7 +55,10 @@ public class StrReader  implements IReader {
         }
     }
 
-
+    /**
+     * repositions this stream to the position at the time the mark method was last called on this input stream.
+     * @throws ReaderException exception
+     */
     public final void reset() throws ReaderException {
         try {
             reader.reset();

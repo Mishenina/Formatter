@@ -7,7 +7,7 @@ import formatter.formatterimplementation.state.IState;
 /**
  *symbol other.
  */
-class TokenOther implements IToken {
+class SymbolOther implements ISymbol {
 
     /**
      * method for processing a symbol.

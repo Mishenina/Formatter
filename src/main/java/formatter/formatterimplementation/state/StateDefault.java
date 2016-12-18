@@ -17,20 +17,15 @@ public class StateDefault implements IState {
      */
     private int indent;
 
-    public NextState nextState = new NextState(indent);
     /**
      * determine next state.
      *
      * @param c current char
      * @return next state
      */
-    public IState getNextState(final String c) {
-        return  nextState.getNextState(c, new StateDefault(indent));
-    }
 
     /**
      * set current indent.
-     *
      * @param value value
      */
     public final void setIndent(final int value) {

@@ -1,13 +1,14 @@
 package formatter.formatterimplementation.symbol;
 
+
 import formatter.core.IWriter;
 import formatter.core.WriterException;
 import formatter.formatterimplementation.state.IState;
 
 /**
- * Created by anna on 09.12.16.
+ * method for formatting.
  */
-public class TokenCloseRoundBrace  implements IToken {
+class SymbolNewLine implements ISymbol {
 
     /**
      * method for processing a symbol.
@@ -18,7 +19,11 @@ public class TokenCloseRoundBrace  implements IToken {
      * @throws WriterException exception writer
      */
     public void processToken(final String token, final IState state, final IWriter out) throws WriterException {
-        out.write(")");
+        out.write("\n");
+        int indent = state.getIndent();
+        for (int i = 0; i < indent; i++) {
+            out.write("\t");
+        }
     }
 
 }

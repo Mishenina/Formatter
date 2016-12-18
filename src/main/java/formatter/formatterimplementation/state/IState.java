@@ -10,13 +10,7 @@ public interface IState {
      */
     int indent = 0;
 
-    /**
-     * determine next state.
-     *
-     * @param c current char
-     * @return next state
-     */
-    IState getNextState(String c);
+
 
     /**
      * set current indent.

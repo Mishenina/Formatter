@@ -7,7 +7,7 @@ import formatter.formatterimplementation.state.IState;
 /**
  * Created by anna on 09.12.16.
  */
-public class TokenOpenRoundBrace implements IToken {
+public class SymbolOpenRoundBrace implements ISymbol {
 
         /**
          * method for processing a symbol.

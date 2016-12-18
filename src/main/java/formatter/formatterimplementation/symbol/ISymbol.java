@@ -7,7 +7,7 @@ import formatter.formatterimplementation.state.IState;
 /**
  * symbol interface.
  */
-public interface IToken {
+public interface ISymbol {
 
     /**
      *  method for processing a symbol.

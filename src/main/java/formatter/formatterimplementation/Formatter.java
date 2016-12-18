@@ -6,7 +6,8 @@ import formatter.core.IFormatter;
 import formatter.core.FormatterException;
 import formatter.core.IWriter;
 import formatter.formatterimplementation.state.IState;
-import formatter.formatterimplementation.symbol.IToken;
+import formatter.formatterimplementation.state.NextState;
+import formatter.formatterimplementation.symbol.ISymbol;
 import formatter.formatterimplementation.symbol.TokenFactory;
 import formatter.formatterimplementation.state.StateDefault;
 
@@ -26,12 +27,13 @@ public class Formatter implements IFormatter {
         try {
             IState currentState = new StateDefault(0);
             TokenFactory factory = new TokenFactory();
-            IReader lexer = new Lexer(in);
-            while (lexer.ready()) {
-                String token = in.read().toString();
-                IToken s = factory.getToken(token, currentState);
+            NextState qq = new NextState(0);
+
+            while (in.ready()) {
+                String token = in.read();
+                ISymbol s = factory.getToken(token, currentState);
                 s.processToken(token, currentState, out);
-                currentState = currentState.getNextState(token);
+                currentState = qq.getNextState(token, currentState);
 
             }
         } catch (Exception e) {

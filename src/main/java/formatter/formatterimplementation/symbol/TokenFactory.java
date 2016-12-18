@@ -12,9 +12,21 @@ import java.util.HashMap;
 public class TokenFactory {
 
     /**
+     * default constructor.
+     */
+    public TokenFactory() {
+        map.put("{", new SymbolOpenBrace());
+        map.put("}", new SymbolCloseBrace());
+        map.put(";", new SymbolSemicolon());
+        map.put("\n", new SymbolNewLine());
+
+    }
+
+
+    /**
      * control symbols map.
      */
-    private static HashMap<Character, IToken> map = new HashMap<>();
+    private static HashMap<String, ISymbol> map = new HashMap<>();
 
     /**
      * selection class.
@@ -23,24 +35,13 @@ public class TokenFactory {
      * @param currentState current state
      * @return create object
      */
-    public static IToken getToken(final String token, final IState currentState) {
+    public static ISymbol getToken(final String token, final IState currentState) {
 
         if (map.containsKey(token)  && currentState instanceof StateDefault) {
             return map.get(token);
         } else {
-            return new TokenOther();
+            return new SymbolOther();
         }
-    }
-
-    /**
-     * default constructor.
-     */
-    public TokenFactory() {
-        map.put('{', new TokenOpenBrace());
-        map.put('}', new TokenCloseBrace());
-        map.put(';', new TokenSemicolon());
-        map.put('\n', new TokenNewLine());
-
     }
 
 }

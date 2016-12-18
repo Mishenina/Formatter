@@ -7,7 +7,7 @@ import formatter.formatterimplementation.state.IState;
 /**
  * symbol semicolon.
  */
-class TokenSemicolon implements IToken {
+class SymbolSemicolon implements ISymbol {
 
     /**
      * method for processing a symbol.

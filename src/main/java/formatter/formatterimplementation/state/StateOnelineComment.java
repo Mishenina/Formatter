@@ -11,16 +11,6 @@ class StateOnelineComment implements IState {
      */
     private int indent;
 
-    public NextState nextState = new NextState(indent);
-    /**
-     * determine next state.
-     *
-     * @param c current char
-     * @return next state
-     */
-    public IState getNextState(final String c) {
-        return  nextState.getNextState(c, new StateOnelineComment(indent));
-    }
 
     /**
      * set current indent.

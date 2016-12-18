@@ -7,7 +7,7 @@ import formatter.formatterimplementation.state.IState;
 /**
  * symbol close brace.
  */
-class TokenCloseBrace implements IToken {
+class SymbolCloseBrace implements ISymbol {
 
     /**
      * method for processing a symbol.
